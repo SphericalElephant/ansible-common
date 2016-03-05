@@ -1,0 +1,17 @@
+# {{ ansible_managed }}
+
+{% if common_resolvconf_domain %}
+domain {{ common_resolvconf_domain }}
+{% endif %}
+
+{% if ansible_local is defined and ansible_local.hardwarenode.hnfqdn and common_resolvconf_hnfqdn %}
+nameserver {{ lookup('dig', ansible_local.hardwarenode.hnfqdn ) }}
+{% else %}
+{% for n in common_resolvconf_nameservers %}
+nameserver {{ n }}
+{% endfor %}
+{% endif %}
+
+{% if common_resolvconf_search %}
+search {% for s in common_resolvconf_search %}{{ s }} {% endfor %}
+{% endif %}

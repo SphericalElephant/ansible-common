@@ -1,0 +1,46 @@
+# {{ ansible_managed }}
+# See /usr/share/postfix/main.cf.dist for a commented, more complete version
+
+myorigin = /etc/mailname
+
+debug_peer_list = {{ common_postfix_debug_peer_list }}
+
+{% if common_postfix_masquerade_domains %}
+masquerade_domains = 
+{% for domain in common_postfix_masquerade_domains %}
+    {{ domain }}
+{% endfor %}
+{% endif %}
+
+smtpd_banner = $myhostname ESMTP $mail_name
+biff = no
+
+# appending .domain is the MUA's job.
+append_dot_mydomain = no
+
+# generate "delayed mail" warnings
+delay_warning_time = {{ common_postfix_delay_warning_time }}
+
+readme_directory = no
+
+{% if common_postfix_smtpd_tls_security_level %}
+# TLS parameters
+smtpd_tls_security_level={{ common_postfix_smtpd_tls_security_level }}
+smtpd_tls_cert_file={{ common_postfix_smtpd_tls_cert_file }}
+smtpd_tls_key_file={{ common_postfix_smtpd_tls_key_file }}
+smtpd_tls_session_cache_database = {{ common_postfix_smtpd_tls_session_cache_database }}
+smtp_tls_session_cache_database = {{ common_postfix_smtp_tls_session_cache_database }}
+{% endif %}
+
+myhostname = {{ common_postfix_hostname }}
+alias_maps = hash:/etc/aliases
+alias_database = hash:/etc/aliases
+mydestination = {{ common_postfix_mydestination }}
+relayhost = {{ common_postfix_relayhost }}
+mynetworks = {{ common_postfix_mynetworks }}
+relay_domains = {{ common_postfix_relay_domains }}
+mailbox_size_limit = 0
+recipient_delimiter = +
+inet_interfaces = {{ common_postfix_inet_interfaces }}
+inet_protocols = {{ common_postfix_inet_protocols }}
+message_size_limit = {{ common_postfix_message_size_limit }}

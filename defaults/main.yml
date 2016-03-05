@@ -1,0 +1,71 @@
+---
+common_apt_keys: []
+common_apt_repositories:
+  - "deb http://cdn.debian.net/debian {{ ansible_distribution_release }} main contrib non-free"
+  - "deb http://cdn.debian.net/debian {{ ansible_distribution_release }}-backports main contrib non-free"
+  - "deb http://security.debian.org/ {{ ansible_distribution_release }}/updates main contrib non-free"
+common_apt_upgrade_policy: ""
+common_resolvconf_hnfqdn: true
+common_resolvconf_nameservers: []
+common_resolvconf_domain: ""
+common_resolvconf_search: []
+common_rsyslog_forwards: []
+common_basic_packages:
+  - apt-transport-https
+  - cron-apt
+  - curl
+  - dstat
+  - etckeeper
+  - git
+  - htop
+  - iputils-ping
+  - mtr-tiny
+  - ncdu
+  - strace
+  - sudo
+  - tmux
+  - tree
+  - vim
+  - zsh
+  # for ansible/debian
+  - lsb-release
+  - python-apt
+  - python-pycurl
+
+common_scripts:
+  - { dest: "/usr/local/bin/zombies", src: "scripts/zombies" }
+common_openssh_keys_root: []
+
+common_aliases:
+  - "mailer-daemon: postmaster"
+  - "postmaster: root"
+  - "nobody: root"
+  - "hostmaster: root"
+  - "usenet: root"
+  - "news: root"
+  - "webmaster: root"
+  - "www: root"
+  - "ftp: root"
+  - "abuse: root"
+  - "noc: root"
+  - "security: root"
+
+common_mailer: "postfix"
+common_mailname: "{{ ansible_fqdn }}"
+
+common_postfix_debug_peer_list: ""
+common_postfix_delay_warning_time: "0h"
+common_postfix_hostname: "{{ ansible_fqdn }}"
+common_postfix_inet_interfaces: loopback-only
+common_postfix_inet_protocols: all
+common_postfix_masquerade_domains: []
+common_postfix_message_size_limit: 10240000
+common_postfix_mydestination: "{{ common_postfix_hostname }}, {{ ansible_hostname }}, localhost.localdomain, localhost"
+common_postfix_mynetworks: "127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128"
+common_postfix_relay_domains: "{{ common_postfix_mydestination }}"
+common_postfix_relayhost: ""
+common_postfix_smtpd_tls_security_level: False
+common_postfix_smtpd_tls_cert_file: "/etc/ssl/certs/ssl-cert-snakeoil.pem"
+common_postfix_smtpd_tls_key_file: "/etc/ssl/private/ssl-cert-snakeoil.key"
+common_postfix_smtpd_tls_session_cache_database: "btree:${data_directory}/smtpd_scache"
+common_postfix_smtp_tls_session_cache_database: "btree:${data_directory}/smtp_scache"

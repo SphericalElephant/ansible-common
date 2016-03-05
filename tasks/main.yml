@@ -1,0 +1,35 @@
+---
+
+- include: resolvconf.yml
+- include: apt.yml
+
+- name: set vim as default editor
+  alternatives: name=editor path=/usr/bin/vim.basic
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  tags: common
+
+- name: copy some custom script
+  copy: dest="{{ item.dest }}" src="{{ item.src }}" owner=root group=root mode=0755
+  with_items: "{{ common_scripts }}"
+  tags: common
+
+- name: /etc/mailname
+  copy: dest=/etc/mailname content="{{ common_mailname }}\n" owner=root group=root mode=0644
+  notify: restart mailer
+  when: common_mailer != False
+  tags: common
+
+- name: /etc/aliases
+  template: dest=/etc/aliases src=aliases.j2 owner=root group=root mode=0644
+  notify:
+    - newaliases
+    - restart mailer
+  when: common_mailer != False
+  tags: common
+
+- include: ntp.yml
+- include: openssh.yml
+- include: rsyslog.yml
+
+- include: "{{ common_mailer }}.yml"
+  when: common_mailer != False

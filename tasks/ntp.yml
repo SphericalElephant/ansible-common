@@ -1,0 +1,11 @@
+---
+
+- name: ntp - install
+  apt: name=ntp
+  when: ansible_virtualization_type != 'lxc' or ansible_virtualization_role == 'host'
+  tags: ['common', 'ntp']
+
+- name: ntp - run and enable
+  service: name=ntp state=started enabled=yes
+  when: ansible_virtualization_type != 'lxc' or ansible_virtualization_role == 'host'
+  tags: ['common', 'ntp'] 

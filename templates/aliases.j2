@@ -1,0 +1,7 @@
+# {{ ansible_managed }}
+
+# /etc/aliases
+
+{% for alias in common_aliases %}
+{{ alias }}
+{% endfor %}

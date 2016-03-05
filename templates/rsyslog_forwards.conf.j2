@@ -1,0 +1,9 @@
+# {{ ansible_managed }}
+
+{% for dest in common_rsyslog_forwards %}
+$ActionQueueType LinkedList
+$ActionQueueFileName {{ dest.name }}
+$ActionResumeRetryCount -1
+$ActionQueueSaveOnShutdown on
+*.* {{ dest.dest }};RSYSLOG_ForwardFormat
+{% endfor %}

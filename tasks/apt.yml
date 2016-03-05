@@ -1,0 +1,25 @@
+---
+- name: apt - add apt keys
+  apt_key: id="{{ item.id }}" url="{{ item.url }}" file="{{ item.file }}" state="{{ item.state }}"
+  tags: ['common', 'apt']
+  with_items: "{{ common_apt_keys }}"
+
+- name: apt - add repositories
+  apt_repository: repo="{{ item }}" update_cache=yes
+  with_items: "{{ common_apt_repositories }}"
+  tags: ['common', 'apt']
+
+- name: apt - remove /etc/apt/sources.list
+  file: path=/etc/apt/sources.list state=absent
+  notify: apt-get update
+  tags: ['common', 'apt'] 
+
+- name: install basic tools
+  apt: pkg="{{ item }}" cache_valid_time=3600 update_cache=yes
+  with_items: "{{ common_basic_packages }}"
+  tags: common
+
+#- name: apt - upgrade system
+#  apt: upgrade="{{ common_apt_upgrade_policy }}"
+#  when: common_apt_upgrade_policy
+#  tags: ['common', 'apt']

@@ -1,0 +1,25 @@
+---
+
+- name: rsyslog - install
+  apt: name=rsyslog
+  tags: ['common', 'rsyslog']
+
+- name: rsyslog - rsyslog.conf
+  template: dest=/etc/rsyslog.conf src=rsyslog.conf.j2 owner=root group=root mode=0644
+  notify: restart rsyslog
+  tags: ['common', 'rsyslog']
+
+- name: rsyslog - rsyslog.d
+  file: path=/etc/rsyslog.d state=directory owner=root group=root mode=0755
+  notify: restart rsyslog
+  tags: ['common', 'rsyslog']
+
+- name: rsyslog - syslog forwarding client.conf
+  template: dest=/etc/rsyslog.d/forwards.conf src=rsyslog_forwards.conf.j2 owner=root group=root mode=0644
+  when: common_rsyslog_forwards
+  notify: restart rsyslog
+  tags: ['common', 'rsyslog']
+
+- name: rsyslog - start and enable
+  service: name=rsyslog state=started enabled=yes
+  tags: ['common', 'rsyslog']

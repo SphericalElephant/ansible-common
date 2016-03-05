@@ -1,0 +1,15 @@
+---
+galaxy_info:
+  author: Farhad Shahbazi
+  description: Common
+  company: Spherical Elephant GmbH
+  license: MIT
+  min_ansible_version: 1.9
+  platforms:
+  - name: Debian
+    versions:
+    - jessie
+    - wheezy
+  categories:
+  - system
+dependencies: []
