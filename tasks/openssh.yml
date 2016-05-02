@@ -14,7 +14,6 @@
   tags: ['common', 'openssh']
 
 - name: openssh - root keys
-  authorized_key: user="root" key="{{ item }}"
-  with_items: "{{ common_openssh_keys_root }}"
+  authorized_key: user="root" key="{{ common_openssh_keys_root | join("\n") }}" exclusive=yes
   when: common_openssh_keys_root
   tags: ['common', 'openssh', 'ssh-keys']
