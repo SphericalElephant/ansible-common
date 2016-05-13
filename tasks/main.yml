@@ -3,6 +3,10 @@
 - include: resolvconf.yml
 - include: apt.yml
 
+- include: locales.yml
+  when: common_locales
+  tags: ['common', 'locales']
+
 - name: set vim as default editor
   alternatives: name=editor path=/usr/bin/vim.basic
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'

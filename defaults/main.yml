@@ -5,6 +5,10 @@ common_apt_repositories:
   - "deb http://cdn.debian.net/debian {{ ansible_distribution_release }}-backports main contrib non-free"
   - "deb http://security.debian.org/ {{ ansible_distribution_release }}/updates main contrib non-free"
 common_apt_upgrade_policy: ""
+
+common_locales: []
+common_locales_default:
+
 common_resolvconf_hnfqdn: true
 common_resolvconf_nameservers: []
 common_resolvconf_domain: ""
