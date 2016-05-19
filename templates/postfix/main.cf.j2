@@ -25,10 +25,16 @@ readme_directory = no
 
 {% if common_postfix_smtpd_tls_security_level %}
 # TLS parameters
-smtpd_tls_security_level={{ common_postfix_smtpd_tls_security_level }}
-smtpd_tls_cert_file={{ common_postfix_smtpd_tls_cert_file }}
-smtpd_tls_key_file={{ common_postfix_smtpd_tls_key_file }}
+smtpd_tls_security_level = {{ common_postfix_smtpd_tls_security_level }}
+smtpd_tls_cert_file = {{ common_postfix_smtpd_tls_cert_file }}
+smtpd_tls_key_file = {{ common_postfix_smtpd_tls_key_file }}
 smtpd_tls_session_cache_database = {{ common_postfix_smtpd_tls_session_cache_database }}
+{% endif %}
+
+{% if common_postfix_smtp_tls_security_level %}
+smtp_tls_security_level = {{ common_postfix_smtp_tls_security_level }}
+smtp_tls_cert_file = {{ common_postfix_smtp_tls_cert_file }}
+smtp_tls_key_file = {{ common_postfix_smtp_tls_key_file }}
 smtp_tls_session_cache_database = {{ common_postfix_smtp_tls_session_cache_database }}
 {% endif %}
 
