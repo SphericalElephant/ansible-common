@@ -5,5 +5,5 @@ $ActionQueueType LinkedList
 $ActionQueueFileName {{ dest.name }}
 $ActionResumeRetryCount -1
 $ActionQueueSaveOnShutdown on
-*.* {{ dest.dest }};RSYSLOG_ForwardFormat
+*.* {{ dest.dest }};{{ dest.format | default("RSYSLOG_ForwardFormat") }}
 {% endfor %}
