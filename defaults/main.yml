@@ -13,6 +13,7 @@ common_resolvconf_hnfqdn: true
 common_resolvconf_nameservers: []
 common_resolvconf_domain: ""
 common_resolvconf_search: []
+common_rsyslog: True
 common_rsyslog_forwards: []
 common_basic_packages:
   - apt-transport-https

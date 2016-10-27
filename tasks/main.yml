@@ -33,7 +33,10 @@
 
 - include: ntp.yml
 - include: openssh.yml
+
 - include: rsyslog.yml
+  when: common_rsyslog
+  tags: ['common', 'rsyslog']
 
 - include: "{{ common_mailer }}.yml"
   when: common_mailer != False
