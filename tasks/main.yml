@@ -1,6 +1,11 @@
 ---
 
 - include: resolvconf.yml
+
+- include: hostname.yml
+  when: common_hostname
+  tags: ['common', 'hostname']
+
 - include: apt.yml
 
 - include: locales.yml

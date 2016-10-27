@@ -6,6 +6,9 @@ common_apt_repositories:
   - "deb http://security.debian.org/ {{ ansible_distribution_release }}/updates main contrib non-free"
 common_apt_upgrade_policy: ""
 
+common_hostname: True
+common_hostname_hosts_additional: []
+
 common_locales: []
 common_locales_default:
 

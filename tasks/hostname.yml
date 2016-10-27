@@ -1,0 +1,22 @@
+---
+- name: set hostname
+  hostname:
+    name: "{{ inventory_hostname_short }}"
+
+- name: /etc/hostname
+  copy:
+    dest: /etc/hostname
+    content: "{{ inventory_hostname_short }}\n"
+    owner: root
+    group: root
+    mode: 0644
+    backup: yes
+    state: file
+
+- name: /etc/hosts
+  template:
+    dest: /etc/hosts
+    src: hosts.j2
+    owner: root
+    group: root
+    mode: 0644
