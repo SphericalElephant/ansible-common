@@ -2,6 +2,7 @@
 - name: set hostname
   hostname:
     name: "{{ inventory_hostname_short }}"
+  ignore_errors: yes
 
 - name: /etc/hostname
   copy:
