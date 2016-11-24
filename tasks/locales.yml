@@ -3,9 +3,7 @@
 - name: set locales
   locale_gen: name="{{ item.name }}" state="{{ item.state | default('present') }}"
   with_items: "{{ common_locales }}"
-  tags: ['common', 'locales']
 
 - name: set default locale
   lineinfile: dest="/etc/default/locale" regexp="LANG=" line="LANG={{ common_locales_default }}"
   when: common_locales_default
-  tags: ['common', 'locales']

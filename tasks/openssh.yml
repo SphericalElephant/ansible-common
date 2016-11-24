@@ -2,18 +2,15 @@
 
 - name: openssh - install
   apt: name=openssh-server
-  tags: ['common', 'openssh']
 
 - name: openssh - start and enable
   service: name=ssh state=running enabled=yes
-  tags: ['common', 'openssh']
 
 - name: openssh - config
   template: dest=/etc/ssh/sshd_config src=sshd_config.j2 owner=root group=root mode=0600
   notify: reload openssh
-  tags: ['common', 'openssh']
 
 - name: openssh - root keys
   authorized_key: user="root" key="{{ common_openssh_keys_root | join("\n") }}" exclusive=yes
   when: common_openssh_keys_root
-  tags: ['common', 'openssh', 'ssh-keys']
+  tags: 'ssh-keys'

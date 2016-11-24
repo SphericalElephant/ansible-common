@@ -2,7 +2,6 @@
 
 - name: install postfix
   apt: name="postfix" state=present
-  tags: ['common', 'postfix']
 
 - name: postfix config
   template: dest="/etc/postfix/{{ item }}" src="postfix/{{ item }}.j2" owner=root group=root mode=0644
@@ -10,8 +9,6 @@
     - main.cf
     - master.cf
   notify: restart mailer
-  tags: ['common', 'postfix']
 
 - name: postfix - start and enable
   service: name=postfix state=started enabled=yes
-  tags: ['common', 'postfix']
