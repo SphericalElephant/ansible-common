@@ -1,6 +1,6 @@
 ---
-
 - include: resolvconf.yml
+  when: common_resolvconf
   tags: ['common', 'resolvconf']
 
 - include: hostname.yml
@@ -8,6 +8,7 @@
   tags: ['common', 'hostname']
 
 - include: apt.yml
+  when: common_apt
   tags: ['common', 'apt']
 
 - include: locales.yml
@@ -24,30 +25,18 @@
   with_items: "{{ common_scripts }}"
   tags: common
 
-- name: /etc/mailname
-  copy: dest=/etc/mailname content="{{ common_mailname }}\n" owner=root group=root mode=0644
-  notify: restart mailer
-  when: common_mailer != False
-  tags: ['common', 'mailer']
-
-- name: /etc/aliases
-  template: dest=/etc/aliases src=aliases.j2 owner=root group=root mode=0644
-  notify:
-    - newaliases
-    - restart mailer
-  when: common_mailer != False
+- include: mailer.yml
+  when: common_mailer
   tags: ['common', 'mailer']
 
 - include: ntp.yml
+  when: common_ntp
   tags: ['common', 'ntp']
 
 - include: openssh.yml
+  when: common_openssh
   tags: ['common', 'openssh']
 
 - include: rsyslog.yml
   when: common_rsyslog
   tags: ['common', 'rsyslog']
-
-- include: "{{ common_mailer }}.yml"
-  when: common_mailer != False
-  tags: ['common', 'mailer']

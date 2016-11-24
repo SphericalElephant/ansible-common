@@ -1,0 +1,13 @@
+---
+- name: /etc/mailname
+  copy: dest=/etc/mailname content="{{ common_mailname }}\n" owner=root group=root mode=0644
+  notify: restart mailer
+
+- name: /etc/aliases
+  template: dest=/etc/aliases src=aliases.j2 owner=root group=root mode=0644
+  notify:
+    - newaliases
+    - restart mailer
+
+- include: "{{ common_mailer_mailer }}.yml"
+  when: common_mailer_mailer != False

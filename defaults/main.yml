@@ -1,4 +1,5 @@
 ---
+common_apt: True
 common_apt_keys: []
 common_apt_repositories:
   - "deb http://cdn.debian.net/debian {{ ansible_distribution_release }} main contrib non-free"
@@ -12,10 +13,14 @@ common_hostname_hosts_additional: []
 common_locales: []
 common_locales_default:
 
+common_ntp: True
+
+common_resolvconf: True
 common_resolvconf_hnfqdn: true
 common_resolvconf_nameservers: []
 common_resolvconf_domain: ""
 common_resolvconf_search: []
+
 common_rsyslog: True
 common_rsyslog_forwards: []
 common_basic_packages:
@@ -42,6 +47,8 @@ common_basic_packages:
 
 common_scripts:
   - { dest: "/usr/local/bin/zombies", src: "scripts/zombies" }
+
+common_openssh: True
 common_openssh_keys_root: []
 
 common_aliases:
@@ -58,7 +65,8 @@ common_aliases:
   - "noc: root"
   - "security: root"
 
-common_mailer: "postfix"
+common_mailer: True
+common_mailer_mailer: "postfix"
 common_mailname: "{{ ansible_fqdn }}"
 
 common_postfix_debug_peer_list: ""

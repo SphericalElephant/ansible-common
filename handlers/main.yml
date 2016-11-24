@@ -16,10 +16,10 @@
   service: name=resolvconf state=restarted
 
 - name: reload mailer
-  service: name="{{ common_mailer }}" state=reloaded
+  service: name="{{ common_mailer_mailer }}" state=reloaded
 
 - name: restart mailer
-  service: name="{{ common_mailer }}" state=restarted
+  service: name="{{ common_mailer_mailer }}" state=restarted
 
 - name: newaliases
   command: newaliases
