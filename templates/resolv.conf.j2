@@ -10,5 +10,5 @@ nameserver {{ lookup('dig', ansible_local.hardwarenode.hnfqdn ) }}
 nameserver {{ nameserver }}
 {% endfor %}
 {% if common_resolvconf_search -%}
-search {% for name in common_resolvconf_search %}{{ name }} {% endfor %}
+search {{ common_resolvconf_search|join(' ') }}
 {% endif %}
