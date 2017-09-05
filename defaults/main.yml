@@ -16,6 +16,7 @@ common_locales_default:
 common_ntp: True
 
 common_resolvconf: True
+common_resolvconf_remove_resolvconf: True
 common_resolvconf_hnfqdn: true
 common_resolvconf_nameservers: []
 common_resolvconf_domain: ""

@@ -1,12 +1,13 @@
 ---
+- name: resolvconf - remove
+  apt: name=resolvconf state=absent
+  when: common_resolvconf_remove_resolvconf
 
-- name: resolvconf - install
-  apt: name=resolvconf state=present
-
-- name: resolvconf - tail file
-  template: dest=/etc/resolvconf/resolv.conf.d/tail src=resolvconf_tail.j2 owner=root group=root mode=0644
-  when: common_resolvconf_nameservers
-  notify: restart resolvconf
-
-- name: resolvconf - start and enable
-  service: name=resolvconf state=started enabled=yes
+- name: /etc/resolv.conf
+  template:
+      dest: /etc/resolv.conf
+      src: resolv.conf.j2
+      owner: root
+      group: root
+      mode: 0644
+  when: common_resolvconf_remove_resolvconf
