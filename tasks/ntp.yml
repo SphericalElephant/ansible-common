@@ -1,9 +1,9 @@
 ---
 
-- name: ntp - install
-  apt: name=ntp
+- name: ntp - install chrony
+  apt: name=chrony
   when: ansible_virtualization_type != 'lxc' or ansible_virtualization_role == 'host'
 
-- name: ntp - run and enable
-  service: name=ntp state=started enabled=yes
+- name: ntp - run and enable chrony
+  service: name=chrony state=started enabled=yes
   when: ansible_virtualization_type != 'lxc' or ansible_virtualization_role == 'host'
