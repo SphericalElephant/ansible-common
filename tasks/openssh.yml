@@ -7,7 +7,13 @@
   service: name=ssh state=started enabled=yes
 
 - name: openssh - config
-  template: dest=/etc/ssh/sshd_config src=sshd_config.j2 owner=root group=root mode=0600
+  template:
+      dest: /etc/ssh/sshd_config
+      src: sshd_config.j2
+      owner: root
+      group: root
+      mode: 0600
+      validate: '/usr/sbin/sshd -T -f %s'
   notify: reload openssh
 
 - name: openssh - root keys

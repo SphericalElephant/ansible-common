@@ -50,7 +50,13 @@ common_scripts:
   - { dest: "/usr/local/bin/zombies", src: "scripts/zombies" }
 
 common_openssh: True
+common_openssh_ports: []
+common_openssh_host_keys: []
+common_openssh_listen_addresses: []
+common_openssh_permit_root_login: "no"
+common_openssh_password_authentication: "no"
 common_openssh_keys_root: []
+common_openssh_x11_forwarding: "no"
 
 common_aliases:
   - "mailer-daemon: postmaster"
