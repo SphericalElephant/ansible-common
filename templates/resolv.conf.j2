@@ -3,9 +3,6 @@
 {% if common_resolvconf_domain -%}
 domain {{ common_resolvconf_domain }}
 {% endif %}
-{% if ansible_local is defined and ansible_local.hardwarenode.hnfqdn and common_resolvconf_hnfqdn -%}
-nameserver {{ lookup('dig', ansible_local.hardwarenode.hnfqdn ) }}
-{% endif %}
 {% for nameserver in common_resolvconf_nameservers -%}
 nameserver {{ nameserver }}
 {% endfor %}
